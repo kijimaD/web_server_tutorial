@@ -11,8 +11,9 @@ fn main() {
     for stream in listener.incoming() {
         let stream = stream.unwrap();
 
-        println!("Connection established!");
-        handle_connection_sleep(stream);
+        thread::spawn(|| {
+            handle_connection_sleep(stream);
+        });
     }
 }
 
